@@ -30,7 +30,7 @@ export default {
       // 默认是一个空对象
       loginForm: {
         username: 'admin',
-        password: '123'
+        password: '123456'
       },
       // 这是表单的验证规则
       loginFormRules: {
@@ -58,6 +58,9 @@ export default {
         console.log(res)
         if (res.meta.status !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
+        // 登录成功后将token保存到客户端sessionStorage
+        window.sessionStorage.setItem('token', res.data.token)
+        this.$router.push('/home')
       })
     }
   }
